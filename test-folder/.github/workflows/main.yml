@@ -1,0 +1,23 @@
+name: Push to another repo
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: .
+          destination-github-username: 'tsnm-x'
+          destination-repository-name: 'test-Repo-2'
+          target-branch: test-branch
+          target-directory: test-folder
